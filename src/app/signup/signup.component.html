@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="form-row">
+        <div class="form-group col">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <label for="userName">Username</label>
+                <input type="text" id="userName" placeholder="Enter Username" class="form-control" formControlName="userName" [ngClass]="{ 'is-invalid': registerForm.get('userName')?.errors }">
+                <div class="error" *ngIf="registerForm.get('userName')?.invalid">username is invalid<sup>*</sup></div>
+                
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label>Date of Birth</label>
+                        <input type="date" formControlName="dob" placeholder="Date of Birth" class="form-control" [ngClass]="{ 'is-invalid': registerForm.get('dob')?.errors }" />
+                        <div *ngIf="registerForm.get('dob')?.errors" class="invalid-feedback">
+                            <div *ngIf="registerForm.get('dob')?.errors?.['required']">Date of Birth is required<sup>*</sup></div>
+                            <div *ngIf="registerForm.get('dob')?.errors?.['pattern']">Date of Birth must be a valid date in the format YYYY-MM-DD</div>
+                        </div>
+                    </div>
+    
+                    <div class="form-group col">
+                        <label>phonenumber</label>
+                        <input type="number" formControlName="phone" placeholder="phonenumber" (keypress)="numericOnly($event)" class="form-control" [ngClass]="{ 'is-invalid': registerForm.get('phone')?.errors }" />
+                        <div *ngIf="registerForm.get('phone')?.errors?.['required']">phonenumber is required<sup>*</sup></div>
+                        <div *ngIf="registerForm.get('phone')?.errors?.['minLength']">Phonenumber must be in 10 digits<sup>*</sup></div>
+                        <div *ngIf="registerForm.get('phone')?.errors?.['maxLength']">Phonenumber must not exceed in 10 digits<sup>*</sup></div>
+                    </div>
+                    <div class="form-group col">
+                        <label>Email</label>
+                        <input type="text" formControlName="email" placeholder="Email" class="form-control" [ngClass]="{ 'is-invalid': registerForm.get('email')?.errors }" />
+                        <div *ngIf="registerForm.get('email')?.errors" class="invalid-feedback">
+                            <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required<sup>*</sup></div>
+                            <div *ngIf="registerForm.get('email')?.errors?.['email']">Invalid Email address<sup>*</sup></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label>Password</label>
+                        <input type="password" formControlName="password" placeholder="Password" (keypress)="numericOnly($event)" class="form-control" [ngClass]="{ 'is-invalid':registerForm.get('password')?.errors }" />
+                        <div *ngIf="registerForm.get('password')?.errors" class="invalid-feedback">
+                            <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required<sup>*</sup></div>
+                            <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters<sup>*</sup></div>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label>Confirm Password</label>
+                        <input type="password" formControlName="confirmPassword" placeholder="confirm password" (keypress)="numericOnly($event)" class="form-control" [ngClass]="{ 'is-invalid': registerForm.get('confirmPassword')?.errors }" />
+                        <div *ngIf="registerForm.get('confirmPassword')?.errors" class="invalid-feedback">
+                            <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required<sup>*</sup></div>
+                            <div *ngIf="registerForm.get('confirmPassword')?.errors?.['mustMatch']">Passwords must match<sup>*</sup></div>
+                        </div>
+                    </div>
+                </div>
+            
+                
+                <div class="text-center">
+                    <button class="btn btn-success" type="button" routerLink="/details" routerLinkActive="active" (click)="onSubmit()">Submit</button>
+                    <button class="btn btn-danger" type="reset" (click)="onReset()">Reset</button>
+                    <!-- <a  routerLink="/details" (click)="onSubmit()"></a> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

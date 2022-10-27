@@ -1,0 +1,28 @@
+
+<form usersform="ngForm" (ngSubmit)="getuserdata(usersform.value)">
+    <input type="text" name="name" placeholder="Enter Name">
+    <br><br>
+    <input type="email" name="email" placeholder="Enter email">
+    <br><br>
+    <input type="password" name="password" placeholder="Enter password">
+    <br><br>
+    <button class="btn btn-success">add new user</button>
+</form>
+<hr>
+<table>
+    <tr >
+        <th>id</th>
+        <th>email</th>
+        <th>first name</th>
+        <th>last name</th>
+        <th>avatar</th>   
+    </tr>
+    <tr *ngFor="let com of getcomments.data">
+        <td>{{com.id}}</td>
+        <td>{{com.email}}</td>
+        <td>{{com.first_name}}</td>
+        <td>{{com.last_name}}</td>
+        <td>{{com.avatar}}</td>
+    </tr>
+</table>
+   
